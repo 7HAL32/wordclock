@@ -1,3 +1,6 @@
+/*
+ *
+ */
 #include <Arduino.h>
 
 #include "de_DE.h"
@@ -37,10 +40,12 @@ void Grid_de_DE::setTime(int hour, int minute) {
 	Led::ids[i].setRGB(Config::color_bg.r * 0.2, Config::color_bg.g * 0.2, Config::color_bg.b * 0.2);
   }
 
+  // IT IS
   for(int i = 0; i < 5; i++) {
 	Led::ids[Led::getLedId(Grid_de_DE::time_it_is[i])].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
   }
 
+  // 
   for(int m = 0; m < 12; m++) {
 	if(Grid_de_DE::time_minutes[minute][m] >= 0) {
 	  Led::ids[Led::getLedId(Grid_de_DE::time_minutes[minute][m])].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
@@ -57,11 +62,13 @@ void Grid_de_DE::setTime(int hour, int minute) {
 	}
   }
 
+  // single minutes
   if(GRID_SINGLE_MINUTES == 1) {
-	// single minutes
-	for(int s = (NUM_LEDS - 4); s < (NUM_LEDS - 4 + singleMinute); s++) {
-	  Led::ids[s].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
-	}
+	// for(int s = (NUM_LEDS - 4); s < (NUM_LEDS - 4 + singleMinute); s++) {
+	//  Led::ids[s].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
+	//
+  for(int s = 0; s < singleMinute; s++) {
+    Led::ids[Led::getLedId(Grid_de_DE::time_single_minutes[s])].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
   } else {
 	for(int s = 0; s < singleMinute; s++) {
 	  Led::ids[s].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
@@ -71,6 +78,9 @@ void Grid_de_DE::setTime(int hour, int minute) {
   FastLED.setBrightness(Config::brightness * 255);
   FastLED.show();
 }
+
+// Mapping of individual LEDs
+// from top left rightwards, start with 0
 
 int Grid_de_DE::time_it_is[5] = {0, 1, 3, 4, 5}; // es ist
 
@@ -88,6 +98,8 @@ int Grid_de_DE::time_minutes[12][12] = {
   { 11,  12,  13,  14,  39,  40,  41,  -1,  -1,  -1,  -1,  -1}, // zehn vor
   {  7,   8,   9,  10,  39,  40,  41,  -1,  -1,  -1,  -1,  -1}  // fünf vor
 };
+
+int Grid_de_DE::time_single_minutes[4] = {112, 114, 116, 118}; // 1, 2, 3, 4
 
 int Grid_de_DE::time_hours[12][6] = {
   { 49,  50,  51,  52,  53,  -1}, // zwölf

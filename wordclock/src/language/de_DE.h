@@ -3,6 +3,7 @@
 
 class Grid_de_DE {
 	public:
+	static int time_single_minutes[4];
 	static int time_it_is[5];
 	static int time_minutes[12][12];
 	static int time_hours[12][6];
