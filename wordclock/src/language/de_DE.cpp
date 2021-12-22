@@ -69,7 +69,8 @@ void Grid_de_DE::setTime(int hour, int minute) {
 	//
   for(int s = 0; s < singleMinute; s++) {
     Led::ids[Led::getLedId(Grid_de_DE::time_single_minutes[s])].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
-  } else {
+  } 
+   } else {
 	for(int s = 0; s < singleMinute; s++) {
 	  Led::ids[s].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
 	}
