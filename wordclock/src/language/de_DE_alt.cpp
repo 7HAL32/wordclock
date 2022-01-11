@@ -59,9 +59,9 @@ void Grid_de_DE_alt::setTime(int hour, int minute) {
 
   if(GRID_SINGLE_MINUTES == 1) {
 	// single minutes
-	for(int s = (NUM_LEDS - EXTRA_LEDS); s < (NUM_LEDS - EXTRA_LEDS + singleMinute); s++) {
-	  Led::ids[s].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
-	}
+  for(int s = 0; s < singleMinute; s++) {
+    Led::ids[Led::getLedId(Grid_de_DE_alt::time_single_minutes[s])].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
+  }
   } else {
 	for(int s = 0; s < singleMinute; s++) {
 	  Led::ids[s].setRGB(Config::color_fg.r, Config::color_fg.g, Config::color_fg.b);
@@ -87,6 +87,8 @@ int Grid_de_DE_alt::time_minutes[12][12] = {
   { 11,  12,  13,  14,  39,  40,  41,  -1,  -1,  -1,  -1,  -1}, // zehn vor
   {  7,   8,   9,  10,  39,  40,  41,  -1,  -1,  -1,  -1,  -1}  // fünf vor
 };
+
+int Grid_de_DE_alt::time_single_minutes[4] = {112, 114, 116, 118}; // 1, 2, 3, 4
 
 int Grid_de_DE_alt::time_hours[12][6] = {
   { 49,  50,  51,  52,  53,  -1}, // zwölf
